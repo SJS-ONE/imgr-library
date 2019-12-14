@@ -27,4 +27,6 @@ const library = new imgr.Library(config);
     //await library.scanSource('lego')
 
     console.log(library.getSourceByName('lego').getTree())
+
+    console.log(library.getSources().length)
 })();

@@ -25,14 +25,12 @@ export class Database{
     }
 
     protected create(){
-        NodeFs.writeFileSync(this.config.filePath, '{}', { flag: 'wx' })
+        NodeFs.closeSync(NodeFs.openSync(this.config.filePath, 'a'))
     }
 
     protected createIfNotExists(){
-        try {
-            NodeFs.existsSync(this.config.filePath)
-        } catch(err) {
-            this.create();
+        if(!NodeFs.existsSync(this.config.filePath)){
+            this.create()
         }
     }
 
