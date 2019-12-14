@@ -32,7 +32,7 @@ export class Library extends AlbumsHolder(Object){
     public loadDatabase(){
         const data = this.db.getData();
         const dataSources = data.sources || []; 
-        this.sources = dataSources.map((dataSource: any) => Source.createFromData(dataSource))
+        this.sources.push(...dataSources.map((dataSource: any) => Source.createFromData(dataSource)))
         DebugImgrLibrary('Sourced loaded from Database: '+this.sources.length)
         //this.sources = dataSources;
     }
