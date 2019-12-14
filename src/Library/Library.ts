@@ -71,10 +71,12 @@ export class Library extends AlbumsHolder(Object){
             DebugImgrLibrary(''+e);
         }
         DebugImgrLibrary('scanning source finished: ', sourceName)
-        this.db.setData({
-            sources: this.sources
-        });
-        this.db.save();
+        if(!this.config.skipDbSave){
+            this.db.setData({
+                sources: this.sources
+            });
+            this.db.save();
+        }
     }
 
     public getImageByUuid(uuid: string){
