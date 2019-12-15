@@ -62,6 +62,12 @@ export class Library extends AlbumsHolder(Object){
         throw Error('no source with name: "'+sourceName+'" configured');
     }
 
+    public async scanSources(){
+        for(const source of this.sources){
+            await this.scanSource(source.getConfig().name);
+        }
+    }
+
     public async scanSource(sourceName:string){
         DebugImgrLibrary('scanning source: ', sourceName)
         const source = this.getSourceByName(sourceName);
