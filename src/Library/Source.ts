@@ -25,7 +25,7 @@ export default class Source extends ImagesHolder(Object){
         this.config = config;
     }
 
-    public getImagesByPath(path: String, recursive: boolean = true){
+    public getImageUuidsByPath(path: String, recursive: boolean = true){
         const parts = path.split('/').filter(p => !!p);
 
         const folder = Utils.readPathInFolder(this.tree, parts);
@@ -33,7 +33,11 @@ export default class Source extends ImagesHolder(Object){
             return undefined;
         }
 
-        return this.getImages(Utils.readFilesRecursiveFromFolder(folder));
+        return Utils.readFilesRecursiveFromFolder(folder);
+    }
+
+    public getImagesByPath(path: String, recursive: boolean = true){
+        return this.getImages(this.getImageUuidsByPath(path, recursive));
     }
 
     public getConfig(){
